@@ -1,18 +1,38 @@
-cmake_minimum_required(VERSION 3.21)
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64")
-set(CMAKE_CXX_VISIBILITY_PRESET hidden)
-
-project(SmartSelectFilters VERSION 1.0.0)
-
-file(GLOB SOURCES CONFIGURE_DEPENDS src/*.cpp)
-add_library(${PROJECT_NAME} SHARED ${SOURCES})
-
-if (NOT DEFINED ENV{GEODE_SDK})
-    message(FATAL_ERROR "Unable to find Geode SDK! Please define GEODE_SDK environment variable to point to Geode")
-endif()
-
-add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
-
-setup_geode_mod(${PROJECT_NAME})
+{
+	"geode": "5.11.2",
+	"gd": {
+		"win": "2.2081",
+		"android": "2.2081",
+		"mac": "2.2081",
+		"ios": "2.2081"
+	},
+	"id": "yourname.smart-select-filters",
+	"name": "Smart Select Filters",
+	"version": "v1.0.0",
+	"developer": "yourname",
+	"description": "Adds a Smart Select popup to the editor delete tab with 70+ selection filters (block flags, trigger types, trigger settings, groups, layers).",
+	"settings": {
+		"close-after-select": {
+			"type": "bool",
+			"name": "Close popup after selecting",
+			"description": "Close the Smart Select popup right after a filter is applied.",
+			"default": true
+		},
+		"button-offset-x": {
+			"type": "int",
+			"name": "Button X offset",
+			"description": "Nudge the Smart Select button horizontally in the delete tab.",
+			"default": 0,
+			"min": -300,
+			"max": 300
+		},
+		"button-offset-y": {
+			"type": "int",
+			"name": "Button Y offset",
+			"description": "Nudge the Smart Select button vertically in the delete tab.",
+			"default": 0,
+			"min": -300,
+			"max": 300
+		}
+	}
+}
